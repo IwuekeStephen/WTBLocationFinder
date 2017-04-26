@@ -1,0 +1,66 @@
+﻿
+@model IEnumerable<Movie.Models.MovieViewModel>
+    ViewBag.Title = "Index";
+}
+<head>
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.1.1.min.js"></script>
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+</head>
+<h2>Block Busters</h2>
+
+<div id="Popup-Box">
+    <input type="text" id="Dialog-Name" />
+    <input type="text" id="Dialog-Address" />
+    <input type="submit" onclick="onsave()" value="save" />
+</div>
+<div>
+    @using (Html.BeginForm("Search", "Movie"))
+    {
+        <input type="text" id="txtSearch" name="txtSearch"/>
+        <input type="submit" value="Search" />
+    }
+
+</div>
+    <div>
+      <table>
+    @foreach (var movie in Model)
+    {
+        <tr>
+            <td>
+                @Html.LabelFor(s => movie.Title);
+                @Html.DisplayFor(s => movie.Title);
+              
+            </td>
+           
+           <td>
+               <a href="@Url.Action("Popup","Movie",null)">
+                   <image src="@movie.Poster" alt="Sample Image" width="300px"></image>
+               </a>
+            </td>
+        </tr>;
+
+
+
+
+        }
+    </table>
+   </div>
+@*<script>
+    $(document).ready(function () {
+        $('#Popup-Box').dialog({
+            autoOpen: false,
+            height: 500,
+            width: 700,
+            modal: true
+        })});
+
+    function OpenDialog() {
+
+        var name = $('#Name').val();
+        var address = $('#Address').val();
+        $('#Dialog-Name').val(name);
+        $('#Dialog-Address').val(address);
+        $('#Popup-Box').dialog('open');
+    }
+    </script>*@
